@@ -9,8 +9,10 @@ t=0
 music=False
 
 def set():
-    global t
+    global t, rem_text
     rem=sd.askstring('time', "input time in format hh.mm")
+    rem_text=sd.askstring('reminder', 'remind about:')
+
     if rem:
         try:
             hour=int(rem.split(':')[0])
@@ -18,18 +20,19 @@ def set():
             now=datetime.datetime.now()
             dt=now.replace(hour=hour, minute=minuts, second=0, microsecond=0)
             t=dt.timestamp()
-            label.config(text=f"reminder: {hour:02}:{minuts:02}")
+            label.config(text=f"reminder: {hour:02}:{minuts:02}\n about {rem_text}")
 
         except Exception as e:
-            mb.showerror('error', 'error')
+            mb.showerror('error', f'error {e}')
 
 def check():
-    global t
+    global t, rem_text
     if t:
         now=time.time()
         if now>=t:
             play_sound()
             t=0
+            mb.showinfo('reminder', f'reminder: {rem_text}')
     window.after(10000,check)
 def stop_m():
     global music
