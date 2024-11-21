@@ -4,23 +4,6 @@ from tkinter import messagebox as mb
 from tkinter import ttk
 
 
-
-# def update_o_m_label(event):
-#     code=o_m_combobox.get()
-#     name=currency_dict[code]
-#     o_m_label.config(text=name)
-#
-# def update_b_label(event):
-#     code=b_combobox.get()
-#     name=currency_dict.get(code)
-#     b_label.config(text=name)
-#
-#
-# def update_cur_label(event):
-#     code=t_combobox.get()
-#     name=currency_dict[code]
-#     cur_label.config(text=name)
-
 def exchange():
     cur_name=t_combobox.get()
     for key, val in currency_dict.items():
@@ -45,9 +28,7 @@ def exchange():
             if cur_code in data['conversion_rates']:
                 exchange_rate=data['conversion_rates'][cur_code]
                 o_m_exchange_rate = data['conversion_rates'][o_m_cur_code]
-                # c_name=currency_dict[cur_code]
-                # b_name=currency_dict[b_cur_code]
-                # o_m_name=currency_dict[o_m_cur_code]
+
                 mb.showinfo('Exchanges currency', f'Exchanges currency {exchange_rate:.2f} {cur_name} or '
                                                   f'{o_m_exchange_rate:.2f} {o_m_cur_name} for 1 {b_cur_name}')
             else:
@@ -78,24 +59,15 @@ Label(text='Choose base currency').pack(padx=10, pady=5)
 
 b_combobox=ttk.Combobox(values=list(currency_dict.values()))
 b_combobox.pack()
-# b_combobox.bind("<<ComboboxSelected>>", update_b_label)
-# b_label=(ttk.Label())
-# b_label.pack()
 
 Label(text='Choose code currency').pack(padx=10, pady=5)
 
 t_combobox=ttk.Combobox(values=list(currency_dict.values()))
 t_combobox.pack()
-# t_combobox.bind("<<ComboboxSelected>>", update_cur_label)
-# cur_label=(ttk.Label())
-# cur_label.pack()
 
 Label(text='Choose one more code currency').pack(padx=10, pady=5)
 o_m_combobox=ttk.Combobox(values=list(currency_dict.values()))
 o_m_combobox.pack()
-# o_m_combobox.bind("<<ComboboxSelected>>", update_o_m_label)
-# o_m_label=(ttk.Label())
-# o_m_label.pack()
 
 Button(text='Get info', command=exchange).pack(padx=10, pady=5)
 
